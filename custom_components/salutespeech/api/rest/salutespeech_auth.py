@@ -22,6 +22,7 @@ class SaluteSpeechAuth:
         scope: str = "SALUTE_SPEECH_PERS",
     ) -> None:
         """SaluteSpeech authorization helper."""
+        # TODO: use bundled CA cert
         self._session: ClientSession = async_get_clientsession(
             hass, verify_ssl=verify_ssl
         )
