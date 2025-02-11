@@ -7,15 +7,24 @@
 import uuid
 from datetime import datetime, timedelta
 from typing import Optional
+from homeassistant.core import HomeAssistant
 
 from aiohttp import ClientSession
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 
 class SaluteSpeechAuth:
-    def __init__(self, hass, auth_key: str, scope: str = "SALUTE_SPEECH_PERS") -> None:
+    def __init__(
+        self,
+        hass: HomeAssistant,
+        auth_key: str,
+        verify_ssl: bool = False,
+        scope: str = "SALUTE_SPEECH_PERS",
+    ) -> None:
         """SaluteSpeech authorization helper."""
-        self._session: ClientSession = async_get_clientsession(hass)
+        self._session: ClientSession = async_get_clientsession(
+            hass, verify_ssl=verify_ssl
+        )
         self._auth_key: str = auth_key
         self._scope: str = scope
         self._token_url: str = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
