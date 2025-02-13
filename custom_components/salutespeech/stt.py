@@ -25,7 +25,13 @@ from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .api.grpc import recognition_pb2, recognition_pb2_grpc
-from .const import DATA_AUTH_HELPER, DATA_ROOT_CERTIFICATES, DOMAIN, LOGGER, STT_LANGUAGES
+from .const import (
+    DATA_AUTH_HELPER,
+    DATA_ROOT_CERTIFICATES,
+    DOMAIN,
+    LOGGER,
+    SUPPORTED_LANGUAGES,
+)
 
 
 async def async_setup_entry(
@@ -55,7 +61,7 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
     @property
     def supported_languages(self) -> List[str]:
         """Return a list of supported languages."""
-        return STT_LANGUAGES
+        return SUPPORTED_LANGUAGES
 
     @property
     def supported_formats(self) -> List[AudioFormats]:
@@ -122,8 +128,8 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
 
             return alternatives
 
-        root_certificates = await self._config_entry.runtime_data[DATA_ROOT_CERTIFICATES]
-        auth_helper = self._config_entry[DATA_AUTH_HELPER]
+        root_certificates = self._config_entry.runtime_data[DATA_ROOT_CERTIFICATES]
+        auth_helper = self._config_entry.runtime_data[DATA_AUTH_HELPER]
 
         ssl_cred = grpc.ssl_channel_credentials(root_certificates=root_certificates)
         token = await auth_helper.get_access_token()

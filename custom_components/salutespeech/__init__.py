@@ -5,6 +5,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
@@ -18,7 +19,7 @@ from custom_components.salutespeech.const import (
 
 from .api.rest.salutespeech_auth import SaluteSpeechAuth
 
-PLATFORMS = [Platform.STT]
+PLATFORMS = [Platform.STT, Platform.TTS]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -31,7 +32,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             "certs",
             "russian_trusted_root_ca.cer",
         )
-        open(file_name, "rb").read()
+        return open(file_name, "rb").read()
 
     entry.runtime_data = {}
     entry.runtime_data[DATA_ROOT_CERTIFICATES] = await hass.async_add_executor_job(
