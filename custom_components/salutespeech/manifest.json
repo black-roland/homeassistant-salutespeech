@@ -1,0 +1,13 @@
+{
+  "domain": "salutespeech",
+  "name": "SaluteSpeech",
+  "codeowners": ["@black-roland"],
+  "config_flow": true,
+  "documentation": "https://github.com/black-roland/homeassistant-salutespeech#README",
+  "integration_type": "service",
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://github.com/black-roland/homeassistant-salutespeech/issues",
+  "loggers": ["salutespeech"],
+  "requirements": [],
+  "version": "0.1.0"
+}
