@@ -29,6 +29,7 @@ from .const import (
     DATA_AUTH_HELPER,
     DATA_ROOT_CERTIFICATES,
     DOMAIN,
+    EVENT_SALUTESPEECH_STT_EMOTIONS,
     LOGGER,
     SUPPORTED_LANGUAGES,
 )
@@ -125,6 +126,15 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
                     transcription = response.transcription
                     if transcription.eou:
                         alternatives.extend([hyp.text for hyp in transcription.results])
+                        if transcription.HasField("emotions_result"):
+                            self.hass.bus.async_fire(
+                                EVENT_SALUTESPEECH_STT_EMOTIONS,
+                                {
+                                    "positive": transcription.emotions_result.positive,
+                                    "neutral": transcription.emotions_result.neutral,
+                                    "negative": transcription.emotions_result.negative,
+                                },
+                            )
 
             return alternatives
 
