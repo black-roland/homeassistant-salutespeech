@@ -12,4 +12,7 @@ LOGGER = logging.getLogger(__package__)
 CONF_AUTH_KEY = "auth_key"
 CONF_VERIFY_SSL = "verify_ssl"
 
+DATA_AUTH_HELPER = "auth_helper"
+DATA_ROOT_CERTIFICATES = "root_certificates"
+
 STT_LANGUAGES = ["ru-RU", "en-US", "kk-KZ"]

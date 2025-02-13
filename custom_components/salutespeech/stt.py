@@ -4,7 +4,6 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os
 from typing import AsyncGenerator, AsyncIterable, List
 
 import grpc
@@ -26,7 +25,7 @@ from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .api.grpc import recognition_pb2, recognition_pb2_grpc
-from .const import DOMAIN, LOGGER, STT_LANGUAGES
+from .const import DATA_AUTH_HELPER, DATA_ROOT_CERTIFICATES, DOMAIN, LOGGER, STT_LANGUAGES
 
 
 async def async_setup_entry(
@@ -123,19 +122,11 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
 
             return alternatives
 
-        ssl_cred = grpc.ssl_channel_credentials(
-            # TODO: fix blocking
-            root_certificates=open(
-                os.path.join(
-                    os.path.dirname(__file__),
-                    "api",
-                    "certs",
-                    "russian_trusted_root_ca.cer",
-                ),
-                "rb",
-            ).read()
-        )
-        token = await self._config_entry.runtime_data.get_access_token()
+        root_certificates = await self._config_entry.runtime_data[DATA_ROOT_CERTIFICATES]
+        auth_helper = self._config_entry[DATA_AUTH_HELPER]
+
+        ssl_cred = grpc.ssl_channel_credentials(root_certificates=root_certificates)
+        token = await auth_helper.get_access_token()
         token_cred = grpc.access_token_call_credentials(token)
         async with aio.secure_channel(
             "smartspeech.sber.ru:443",
