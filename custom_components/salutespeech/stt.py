@@ -117,7 +117,6 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
 
             alternatives = []
             async for response in connection:
-                LOGGER.debug("Received response: %s", response)
                 if response.HasField("backend_info"):
                     backend_info = response.backend_info
                     LOGGER.debug("Backend info: %s", backend_info)

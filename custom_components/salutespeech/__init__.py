@@ -12,7 +12,7 @@ from homeassistant.core import HomeAssistant
 
 from custom_components.salutespeech.const import (
     CONF_AUTH_KEY,
-    CONF_VERIFY_SSL,
+    CONF_USE_BUNDLED_ROOT_CERTIFICATES,
     DATA_AUTH_HELPER,
     DATA_ROOT_CERTIFICATES,
 )
@@ -34,12 +34,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
         return open(file_name, "rb").read()
 
-    entry.runtime_data = {}
-    entry.runtime_data[DATA_ROOT_CERTIFICATES] = await hass.async_add_executor_job(
-        read_root_certificates
+    root_certificates = (
+        await hass.async_add_executor_job(read_root_certificates)
+        if entry.data.get(CONF_USE_BUNDLED_ROOT_CERTIFICATES, True)
+        else None
     )
+
+    entry.runtime_data = {}
+    entry.runtime_data[DATA_ROOT_CERTIFICATES] = root_certificates
     entry.runtime_data[DATA_AUTH_HELPER] = SaluteSpeechAuth(
-        hass, entry.data[CONF_AUTH_KEY], entry.data.get(CONF_VERIFY_SSL)
+        hass, entry.data[CONF_AUTH_KEY], root_certificates
     )
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)

@@ -12,7 +12,7 @@ DOMAIN = "salutespeech"
 LOGGER = logging.getLogger(__package__)
 
 CONF_AUTH_KEY = "auth_key"
-CONF_VERIFY_SSL = "verify_ssl"
+CONF_USE_BUNDLED_ROOT_CERTIFICATES = "use_bundled_root_certificates"
 
 DATA_AUTH_HELPER = "auth_helper"
 DATA_ROOT_CERTIFICATES = "root_certificates"

@@ -8,8 +8,6 @@ See [description in English below](#salutespeech-integration-for-home-assistant)
 
 Интеграция SaluteSpeech для Home Assistant предоставляет функциональность распознавания (STT) и синтеза речи (TTS), используя передовые технологии обработки естественного языка от Sber.
 
-[⚠️ Работа ещё не завершена — часть функционала может быть недоступна](https://youtube.com/live/B2B1vhw1w2Y)
-
 ## Возможности
 
 - **Преобразование речи в текст:**
