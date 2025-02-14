@@ -155,7 +155,7 @@ class SaluteSpeechTTSEntity(TextToSpeechEntity):
         self, stub, request: synthesis_pb2.SynthesisRequest
     ) -> bytes | None:
         """Fetch audio data from SaluteSpeech."""
-        connection = stub.Synthesize(request)
+        connection = stub.Synthesize(request, timeout=10)
 
         audio = io.BytesIO()
         async for response in connection:

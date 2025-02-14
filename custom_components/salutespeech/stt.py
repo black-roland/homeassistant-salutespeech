@@ -115,7 +115,7 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
             """Recognize speech from the audio stream."""
             connection = stub.Recognize(request_generator(), metadata=())
 
-            alternatives = []
+            text = None
             async for response in connection:
                 if response.HasField("backend_info"):
                     backend_info = response.backend_info
@@ -123,19 +123,23 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
 
                 if response.HasField("transcription"):
                     transcription = response.transcription
-                    if transcription.eou:
-                        alternatives.extend([hyp.text for hyp in transcription.results])
-                        if transcription.HasField("emotions_result"):
-                            self.hass.bus.async_fire(
-                                EVENT_SALUTESPEECH_STT_EMOTIONS,
-                                {
-                                    "positive": transcription.emotions_result.positive,
-                                    "neutral": transcription.emotions_result.neutral,
-                                    "negative": transcription.emotions_result.negative,
-                                },
-                            )
 
-            return alternatives
+                    if not transcription.eou:
+                        continue
+
+                    text = " ".join([hyp.text for hyp in transcription.results])
+
+                    if transcription.HasField("emotions_result"):
+                        self.hass.bus.async_fire(
+                            EVENT_SALUTESPEECH_STT_EMOTIONS,
+                            {
+                                "positive": transcription.emotions_result.positive,
+                                "neutral": transcription.emotions_result.neutral,
+                                "negative": transcription.emotions_result.negative,
+                            },
+                        )
+
+            return text
 
         root_certificates = self._config_entry.runtime_data[DATA_ROOT_CERTIFICATES]
         auth_helper = self._config_entry.runtime_data[DATA_AUTH_HELPER]
@@ -149,10 +153,10 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
         ) as channel:
             stub = recognition_pb2_grpc.SmartSpeechStub(channel)
             try:
-                alternatives = await recognize_stream(stub)
-                if not alternatives:
+                transcription = await recognize_stream(stub)
+                if not transcription:
                     return SpeechResult(None, SpeechResultState.ERROR)
-                return SpeechResult(" ".join(alternatives), SpeechResultState.SUCCESS)
+                return SpeechResult(transcription, SpeechResultState.SUCCESS)
             except grpc.RpcError as err:
                 LOGGER.error("Error occurred during speech recognition: %s", err)
                 return SpeechResult(None, SpeechResultState.ERROR)

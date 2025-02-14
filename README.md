@@ -8,6 +8,8 @@ See [description in English below](#salutespeech-integration-for-home-assistant)
 
 Интеграция SaluteSpeech для Home Assistant предоставляет функциональность распознавания (STT) и синтеза речи (TTS), используя передовые технологии обработки естественного языка от Sber.
 
+SaluteSpeech это облачный сервис.
+
 ## Возможности
 
 - **Преобразование речи в текст:**
@@ -48,7 +50,7 @@ See [description in English below](#salutespeech-integration-for-home-assistant)
 
 #### Благодарности
 
-[TK]
+В качестве небольшого ответного жеста, я размещаю имена донатеров в README на «доске почёта». Но доска пока пуста 🙂
 
 ---
 
@@ -57,6 +59,8 @@ See [description in English below](#salutespeech-integration-for-home-assistant)
 [![Add custom repository to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=black-roland&repository=homeassistant-salutespeech&category=integration) [![Set up SaluteSpeech integration](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=salutespeech)
 
 The SaluteSpeech integration for Home Assistant provides speech recognition (STT) and text-to-speech (TTS) functionality using advanced natural language processing technology from Sber.
+
+SpeechKit is a cloud service.
 
 ## Features
 
@@ -98,4 +102,4 @@ If this integration has been useful to you, consider [buying the author a coffee
 
 #### Thank you
 
-[TK]
+As a small token of appreciation, I add the names of donors to the README on the "honor board". However, the board is empty 🙂
