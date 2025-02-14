@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "By default, the certificate from the Ministry of Digital Development is used, which comes with the integration. This is necessary if the certificate is not installed as a [trusted system-wide](https://developers.sber.ru/docs/ru/salutespeech/certificates).",
+        "data": {
+          "auth_key": "Authorization key",
+          "use_bundled_root_certificates": "Use bundled root certificate"
+        }
+      }
+    }
+  }
+}
