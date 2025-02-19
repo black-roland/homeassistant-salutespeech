@@ -50,7 +50,9 @@ SaluteSpeech это облачный сервис.
 
 #### Благодарности
 
-В качестве небольшого ответного жеста, я размещаю имена донатеров в README на «доске почёта». Но доска пока пуста 🙂
+Огромное спасибо всем, кто поддерживает этот проект! Ваш вклад имеет большое значение.
+
+![Спасибо](https://github.com/user-attachments/assets/00e2bd2f-be25-4cae-85ef-3e5fddb8ecbd)
 
 ---
 
@@ -102,4 +104,4 @@ If this integration has been useful to you, consider [buying the author a coffee
 
 #### Thank you
 
-As a small token of appreciation, I add the names of donors to the README on the "honor board". However, the board is empty 🙂
+![Thank you](https://github.com/user-attachments/assets/00e2bd2f-be25-4cae-85ef-3e5fddb8ecbd)
