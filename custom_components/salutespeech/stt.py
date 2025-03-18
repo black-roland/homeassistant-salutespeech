@@ -127,7 +127,7 @@ class SaluteSpeechSTTEntity(SpeechToTextEntity):
                     if not transcription.eou:
                         continue
 
-                    text = " ".join([hyp.text for hyp in transcription.results])
+                    text = " ".join([hyp.normalized_text for hyp in transcription.results])
 
                     if transcription.HasField("emotions_result"):
                         self.hass.bus.async_fire(
