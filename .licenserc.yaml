@@ -1,0 +1,11 @@
+header:
+  license:
+    spdx-id: MPL-2.0
+
+  paths:
+    - 'custom_components/**/*.py'
+
+  paths-ignore:
+    - 'custom_components/salutespeech/api/**/*_pb2{,_grpc}.py'
+
+  comment: on-failure
