@@ -44,8 +44,3 @@ SaluteSpeech это облачный сервис.
 - Введите ваш Access Token и сохраните конфигурацию.
 - Настройте SaluteSpeech в качестве движка распознавания (STT) и синтеза речи (TTS) для вашего голосового помощника.
 
-If this integration has been useful to you, consider [buying the author a coffee](https://www.donationalerts.com/r/mansmarthome)! Your gratitude is appreciated!
-
-#### Thank you
-
-![Thank you](https://github.com/user-attachments/assets/00e2bd2f-be25-4cae-85ef-3e5fddb8ecbd)
