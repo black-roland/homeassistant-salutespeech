@@ -20,7 +20,7 @@ class SaluteSpeechAuth:
         hass: HomeAssistant,
         auth_key: str,
         root_certificates: bytes = None,
-        scope: str = "SALUTE_SPEECH_PERS",
+        scope: str = "SALUTE_SPEECH_B2B",
     ) -> None:
         """SaluteSpeech authorization helper."""
         self._hass: HomeAssistant = hass
